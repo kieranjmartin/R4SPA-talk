@@ -4,9 +4,6 @@
     <title>R4SPA: R Packages and Training to enable Statistical Programming in R</title>
     <meta charset="utf-8">
     <meta name="author" content="Kieran Martin" />
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
-    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="libs/jquery/jquery.min.js"></script>
     <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
@@ -16,6 +13,9 @@
     <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
     <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
     <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="libs/remark-css/default.css" type="text/css" />
+    <link rel="stylesheet" href="libs/remark-css/metropolis.css" type="text/css" />
+    <link rel="stylesheet" href="libs/remark-css/metropolis-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -28,138 +28,263 @@ class: center, middle, inverse, title-slide
 ---
 
 
+layout: true
 
+background-image: url("https://github.com/kieranjmartin/R4SPA-talk/raw/master/r4spa_files/images/rochelogo.png")
 
-background-image: png("./r4spa_files/images/rochelogo.png")
+background-position: right top
 
-???
+background-size: auto
+z-index: 1
 
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
-
----
-class: center, middle
-
-# xaringan
-
-### /ʃæ.'riŋ.ɡæn/
-
----
-class: inverse, center, middle
-
-# Get Started
 
 ---
 
-# Hello World
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+
+# Outline
+
+- Who are we?
+- What was the problem?
+- How did we solve it?
+  - diffdf
+  - r4spa
+  - Tailored R training
+
+---
+
+# Who are we?
+
+- This work today is a collaboration between two people:
+  - Kieran Martin and Craig Gower
+  - check out https://github.com/gowerc and https://github.com/kieranjmartin
+  - My twitter is @kjmartinstats
+- We are Data Analytic Specialists
+- New function, part of statisticial programming
+- Want to modernise statistical programming and new ways of addressing new challeges
+
+---
+
+# What was the problem?
+
+Statistical Programmers want to use R!
+
+- Lots of attendance on R training courses
+- Lots of engagement in discussion around R
+
+But very little... actual R outputs!
+
+---
+
+# What was the problem?
+
+Lack of use cases for R
+
+Key piece of Programming work is setting up analysis datasets
+
+Reluctance to use R for his task?
+
+Why?
+
+---
+
+# Why?
+
+Belief that data manippulation in R is difficult
+
+Lack of tools (proc compare)
+
+Unclear how to work in production
+
+---
+
+# What we are doing
+
+- diffdf
+- R training
+- r4spa
+
+---
+
+#diffdf
+
+Package for comparing datasets
+
+Main page: https://gowerc.github.io/diffdf/
+
+Now on CRAN: https://cran.r-project.org/web/packages/diffdf/index.html
+
+Check out github: https://github.com/gowerc/diffdf
+
+---
+# diffdf example of use:
+
+
 
 
 ```r
-devtools::install_github("yihui/xaringan")
+library(diffdf)
+test_data
 ```
 
---
+```
+## # A tibble: 30 x 11
+##       ID GROUP1 GROUP2 INTEGER BINARY DATE       DATETIME           
+##    &lt;int&gt;  &lt;dbl&gt;  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;  &lt;date&gt;     &lt;dttm&gt;             
+##  1     1      1      1      41 M      2003-06-22 2000-11-28 20:40:53
+##  2     2      1      2      41 F      2016-12-03 1994-08-30 19:05:02
+##  3     3      1      3      41 M      2016-05-08 1992-09-11 11:30:18
+##  4     4      1      4      32 M      2015-06-02 2007-11-12 11:28:29
+##  5     5      1      5      55 F      1986-04-15 1998-08-04 01:27:49
+##  6     6      1      6      33 M      1994-05-25 2001-12-05 08:24:35
+##  7     7      1      7      40 F      2009-02-08 1986-11-02 18:13:03
+##  8     8      1      8      44 F      2020-07-21 1998-08-22 05:23:24
+##  9     9      1      9      51 F      1967-05-25 2003-01-03 22:09:29
+## 10    10      1     10      40 M      2044-03-11 1996-04-19 11:10:12
+## # ... with 20 more rows, and 4 more variables: CONTINUOUS &lt;dbl&gt;,
+## #   CATEGORICAL &lt;fct&gt;, LOGICAL &lt;lgl&gt;, CHARACTER &lt;chr&gt;
+```
 
-# Hello World
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
-
+---
+# diffdf: missing columns:
 
 ```r
-devtools::install_github("yihui/xaringan")
+diffdf( test_data , test_data)
 ```
 
---
-
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
-
-- Create a new R Markdown document from the menu `File -&gt; New File -&gt; R Markdown -&gt; From Template -&gt; Ninja Presentation`;&lt;sup&gt;1&lt;/sup&gt;
-
---
-
-- Click the `Knit` button to compile it;
-
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)&lt;sup&gt;2&lt;/sup&gt; "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](http://slides.yihui.name/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
-]
-
----
-background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
-background-position: 50% 50%
-class: center, bottom, inverse
-
-# You only live once!
-
----
-
-# Hello Ninja
-
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
-
-1. The [remark.js](https://remarkjs.com) library;
-
-1. The **xaringan** package;
-
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
-
----
-
-# remark.js
-
-You can see an introduction of remark.js from [its homepage](https://remarkjs.com). You should read the [remark.js Wiki](https://github.com/gnab/remark/wiki) at least once to know how to
-
-- create a new slide (Markdown syntax&lt;sup&gt;*&lt;/sup&gt; and slide properties);
-
-- format a slide (e.g. text alignment);
-
-- configure the slideshow;
-
-- and use the presentation (keyboard shortcuts).
-
-It is important to be familiar with remark.js before you can understand the options in **xaringan**.
-
-.footnote[[*] It is different with Pandoc's Markdown! It is limited but should be enough for presentation purposes. Come on... You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js [may be improved](https://github.com/gnab/remark/issues/142) in the future.]
-
----
-background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
-background-size: cover
-class: center, bottom, inverse
-
-# I was so happy to have discovered remark.js!
-
----
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-Provides an R Markdown output format `xaringan::moon_reader` as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.
-
-```yaml
----
-title: "A Cool Presentation"
-output:
-  xaringan::moon_reader
-    yolo: true
-    nature:
-      autoplay: 30000
----
+```
+## No issues were found!
 ```
 
-See the help page `?xaringan::moon_reader` for all possible options that you can use.
+```r
+test_data2 &lt;- test_data 
+test_data2 &lt;- test_data2[,-6]
+diffdf(test_data , test_data2 , suppress_warnings = T)
+```
 
+```
+## Differences found between the objects!
+## 
+## A summary is given below.
+## 
+## There are columns in BASE that are not in COMPARE !!
+## All rows are shown in table below
+## 
+##   =========
+##    COLUMNS 
+##   ---------
+##     DATE   
+##   ---------
+```
+---
+# diffdf: missing rows
+
+```r
+test_data2 &lt;- test_data
+test_data2 &lt;- test_data2[1:(nrow(test_data2) - 2),]
+diffdf(test_data, test_data2 , suppress_warnings = T)
+```
+
+```
+## Differences found between the objects!
+## 
+## A summary is given below.
+## 
+## There are rows in BASE that are not in COMPARE !!
+## All rows are shown in table below
+## 
+##   ===============
+##    ..ROWNUMBER.. 
+##   ---------------
+##         29       
+##         30       
+##   ---------------
+```
+---
+# diffdf: different values
+
+```r
+test_data2 &lt;- test_data
+test_data2[5,2] &lt;- 6
+difval &lt;- diffdf(test_data , test_data2 , suppress_warnings = T)
+difval$NumDiff
+```
+
+```
+## # A tibble: 1 x 2
+##   Variable `No of Differences`
+## * &lt;chr&gt;                  &lt;int&gt;
+## 1 GROUP1                     1
+```
+
+```r
+difval$VarDiff_GROUP1
+```
+
+```
+## # A tibble: 1 x 4
+##   VARIABLE ..ROWNUMBER..  BASE COMPARE
+## * &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 GROUP1               5     1       6
+```
+---
+# diffdf: different attributes
+
+```r
+test_data2 &lt;- test_data
+attr(test_data$ID , "label") &lt;- "This is a interesting label"
+attr(test_data2$ID , "label") &lt;- "what do I type here?"
+diffdf(test_data , test_data2 , suppress_warnings = T)
+```
+
+```
+## Differences found between the objects!
+## 
+## A summary is given below.
+## 
+## There are columns in BASE and COMPARE with differing attributes !!
+## All rows are shown in table below
+## 
+##   ========================================================================
+##    VARIABLE  ATTR_NAME          VALUES.BASE              VALUES.COMP      
+##   ------------------------------------------------------------------------
+##       ID       label    This is a interesting label  what do I type here? 
+##   ------------------------------------------------------------------------
+```
 ---
 
+# diffdf: specify id variables
+
+```r
+test_data2 &lt;- test_data
+test_data2$INTEGER[c(5,2,15)] &lt;- 99L 
+iddiff &lt;- diffdf( test_data , test_data2 , keys = c("GROUP1" , "GROUP2") ,
+        suppress_warnings = T)
+iddiff$NumDiff
+```
+
+```
+## # A tibble: 1 x 2
+##   Variable `No of Differences`
+## * &lt;chr&gt;                  &lt;int&gt;
+## 1 INTEGER                    3
+```
+
+```r
+iddiff$VarDiff_INTEGER
+```
+
+```
+## # A tibble: 3 x 5
+##   VARIABLE GROUP1 GROUP2  BASE COMPARE
+## * &lt;chr&gt;     &lt;dbl&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+## 1 INTEGER       1      2    41      99
+## 2 INTEGER       1      5    55      99
+## 3 INTEGER       1     15    44      99
+```
+
+---
 # remark.js vs xaringan
 
 Some differences between using remark.js (left) and using **xaringan** (right):
@@ -348,8 +473,8 @@ DT::datatable(
 )
 ```
 
-<div id="htmlwidget-8273b62f008e86cfd002" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8273b62f008e86cfd002">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4f15593be4edf7db8bb5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4f15593be4edf7db8bb5">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 

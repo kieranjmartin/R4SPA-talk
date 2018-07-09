@@ -4,7 +4,7 @@ author: "Kieran Martin"
 date: "2018/08/16"
 output:
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
+    css: ["./libs/remark-css/default.css","./libs/remark-css/metropolis.css", "./libs/remark-css/metropolis-fonts.css" ]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -12,136 +12,171 @@ output:
       countIncrementalSlides: false
 ---
 
+layout: true
+
+background-image: url("https://github.com/kieranjmartin/R4SPA-talk/raw/master/r4spa_files/images/rochelogo.png")
+
+background-position: right top
+
+background-size: auto
+z-index: 1
+
+
+---
+
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
 
-layout: true
+# Outline
 
-background-image: url()
-
----
-class: center, middle
-
-# xaringan
-
-### /ʃæ.'riŋ.ɡæn/
-
----
-class: inverse, center, middle
-
-# Get Started
+- Who are we?
+- What was the problem?
+- How did we solve it?
+  - diffdf
+  - r4spa
+  - Tailored R training
 
 ---
 
-# Hello World
+# Who are we?
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+- This work today is a collaboration between two people:
+  - Kieran Martin and Craig Gower
+  - check out https://github.com/gowerc and https://github.com/kieranjmartin
+  - My twitter is @kjmartinstats
+- We are Data Analytic Specialists
+- New function, part of statisticial programming
+- Want to modernise statistical programming and new ways of addressing new challeges
 
-```{r eval=FALSE, tidy=FALSE}
-devtools::install_github("yihui/xaringan")
+---
+
+# What was the problem?
+
+Statistical Programmers want to use R!
+
+- Lots of attendance on R training courses
+- Lots of engagement in discussion around R
+
+But very little... actual R outputs!
+
+---
+
+# What was the problem?
+
+Lack of use cases for R
+
+Key piece of Programming work is setting up analysis datasets
+
+Reluctance to use R for his task?
+
+Why?
+
+---
+
+# Why?
+
+Belief that data manippulation in R is difficult
+
+Lack of tools (proc compare)
+
+Unclear how to work in production
+
+---
+
+# What we are doing
+
+- diffdf
+- R training
+- r4spa
+
+---
+
+#diffdf
+
+Package for comparing datasets
+
+Main page: https://gowerc.github.io/diffdf/
+
+Now on CRAN: https://cran.r-project.org/web/packages/diffdf/index.html
+
+Check out github: https://github.com/gowerc/diffdf
+
+---
+# diffdf example of use:
+```{r, include = FALSE}
+
+LENGTH = 30
+set.seed(12334)
+test_data <- tibble::tibble( 
+    ID          = 1:LENGTH,
+    GROUP1      = rep( c(1,2) , each = LENGTH/2),
+    GROUP2      = rep( c(1:(LENGTH/2)), 2 ),
+    INTEGER     = rpois(LENGTH , 40),
+    BINARY      = sample( c("M" , "F") , LENGTH , replace = T),
+    DATE        = lubridate::ymd("2000-01-01") + rnorm(LENGTH, 0, 7000),
+    DATETIME    = lubridate::ymd_hms("2000-01-01 00:00:00") + rnorm(LENGTH, 0, 200000000), 
+    CONTINUOUS  = rnorm(LENGTH , 30 , 12),
+    CATEGORICAL = factor(sample( c("A" , "B" , "C") , LENGTH , replace = T)),
+    LOGICAL     = sample( c(TRUE , FALSE) , LENGTH , replace = T),
+    CHARACTER   = stringi::stri_rand_strings(LENGTH,  rpois(LENGTH , 13),  pattern = "[ A-Za-z0-9]")
+)
 ```
 
---
 
-# Hello World
-
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
-
-```{r eval=FALSE, tidy=FALSE}
-devtools::install_github("yihui/xaringan")
+```{r}
+library(diffdf)
+test_data
 ```
 
---
-
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
-
-- Create a new R Markdown document from the menu `File -> New File -> R Markdown -> From Template -> Ninja Presentation`;<sup>1</sup>
-
---
-
-- Click the `Knit` button to compile it;
-
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)<sup>2</sup> "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](http://slides.yihui.name/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
-]
 
 ---
-background-image: url(`r xaringan:::karl`)
-background-position: 50% 50%
-class: center, bottom, inverse
-
-# You only live once!
-
+# diffdf: missing columns:
+```{r}
+diffdf( test_data , test_data)
+```
+```{r}
+test_data2 <- test_data 
+test_data2 <- test_data2[,-6]
+diffdf(test_data , test_data2 , suppress_warnings = T)
+```
+---
+# diffdf: missing rows
+```{r}
+test_data2 <- test_data
+test_data2 <- test_data2[1:(nrow(test_data2) - 2),]
+diffdf(test_data, test_data2 , suppress_warnings = T)
+```
+---
+# diffdf: different values
+```{r}
+test_data2 <- test_data
+test_data2[5,2] <- 6
+difval <- diffdf(test_data , test_data2 , suppress_warnings = T)
+difval$NumDiff
+difval$VarDiff_GROUP1
+```
+---
+# diffdf: different attributes
+```{r}
+test_data2 <- test_data
+attr(test_data$ID , "label") <- "This is a interesting label"
+attr(test_data2$ID , "label") <- "what do I type here?"
+diffdf(test_data , test_data2 , suppress_warnings = T)
+```
 ---
 
-# Hello Ninja
-
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
-
-1. The [remark.js](https://remarkjs.com) library;
-
-1. The **xaringan** package;
-
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
-
----
-
-# remark.js
-
-You can see an introduction of remark.js from [its homepage](https://remarkjs.com). You should read the [remark.js Wiki](https://github.com/gnab/remark/wiki) at least once to know how to
-
-- create a new slide (Markdown syntax<sup>*</sup> and slide properties);
-
-- format a slide (e.g. text alignment);
-
-- configure the slideshow;
-
-- and use the presentation (keyboard shortcuts).
-
-It is important to be familiar with remark.js before you can understand the options in **xaringan**.
-
-.footnote[[*] It is different with Pandoc's Markdown! It is limited but should be enough for presentation purposes. Come on... You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js [may be improved](https://github.com/gnab/remark/issues/142) in the future.]
-
----
-background-image: url(`r xaringan:::karl`)
-background-size: cover
-class: center, bottom, inverse
-
-# I was so happy to have discovered remark.js!
-
----
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-Provides an R Markdown output format `xaringan::moon_reader` as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.
-
-```yaml
----
-title: "A Cool Presentation"
-output:
-  xaringan::moon_reader
-    yolo: true
-    nature:
-      autoplay: 30000
----
+# diffdf: specify id variables
+```{r}
+test_data2 <- test_data
+test_data2$INTEGER[c(5,2,15)] <- 99L 
+iddiff <- diffdf( test_data , test_data2 , keys = c("GROUP1" , "GROUP2") ,
+        suppress_warnings = T)
+iddiff$NumDiff
+iddiff$VarDiff_INTEGER
 ```
 
-See the help page `?xaringan::moon_reader` for all possible options that you can use.
-
 ---
-
 # remark.js vs xaringan
 
 Some differences between using remark.js (left) and using **xaringan** (right):
