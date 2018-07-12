@@ -86,9 +86,11 @@ Unclear how to work in production
 
 # What we are doing
 
-- diffdf
-- R training
-- helper packages
+diffdf
+
+R training
+
+helper packages
 
 ---
 
@@ -98,7 +100,7 @@ Package for comparing datasets
 
 Main page: https://gowerc.github.io/diffdf/
 
-Now on CRAN: https://cran.r-project.org/web/packages/diffdf/index.html
+Now on CRAN: https://CRAN.R-project.org/package=diffdf
 
 Check out github: https://github.com/gowerc/diffdf
 
@@ -179,18 +181,23 @@ iddiff$VarDiff_INTEGER
 ---
 # R training 
 
-In house training on data manipulation using the tidyverse
+In house training on **data manipulation** using the **tidyverse**
 
 **What makes this different?**
 
-- Focused on one task: data derivation
-- tidyverse makes easier to read code (easier for those with less R experience)
+- Focused on **one** task: data derivation
+- tidyverse makes **easier** to read code (those with less R experience)
 - Exercises based on our data and specifications
-- Plan to train people before they have a specific use case for the training
+- Plan to train people with a specific **use case** for the training
 
+---
 # Other activities / Q and A
 
-- Other helper packages
-  - Goal to make people's lives easier when working in R
-- Any questions?
+Other helper packages
+
+
+**Goal**: make people's lives easier when working in R
+
+
+Any questions?
 
