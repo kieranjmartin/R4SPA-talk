@@ -234,3 +234,33 @@ position: absolute;
 .font200 {
   font-size: 200%;
 }
+
+.logo{
+    content: "";
+    background-repeat: no-repeat;
+background-image: url("https://github.com/kieranjmartin/R4SPA-talk/raw/master/r4spa_files/images/rochelogo.png");
+
+background-position: right top;
+
+background-size: auto;
+}
+
+#over
+{
+    position:absolute;
+    width:80%;
+    height:30%;
+    text-align: center; /*handles the horizontal centering*/
+}
+/*handles the vertical centering*/
+.Centerer
+{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.Centered
+{
+    display: inline-block;
+    vertical-align: middle;
+}

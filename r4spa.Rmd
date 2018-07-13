@@ -201,3 +201,15 @@ Other helper packages
 
 Any questions?
 
+---
+
+<div id="over">
+<span class="Centerer">    </span>
+    <img class="Centered" src="https://github.com/kieranjmartin/R4SPA-talk/raw/master/r4spa_files/images/rocheslogan.png" >
+
+</div>
+
+
+
+
+

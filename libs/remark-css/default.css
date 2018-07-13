@@ -12,13 +12,12 @@ a, a > code {
 .remark-code-line {
     font-size: 60%;
     padding: 1px;
-    z-index: -1
+
 }
 .remark-inline-code {
   /* background: #F5F5F5; /* lighter */
   font-size: 60%;
   padding: 1px;
-  z-index: -1;
   background: #e7e8e2; /* darker */
 }
 
