@@ -68,7 +68,7 @@ Lack of use cases for R
 
 Key piece of Programming work is setting up analysis datasets
 
-Reluctance to use R for his task?
+Reluctance to use R for this task?
 
 Why?
 
