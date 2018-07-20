@@ -34,13 +34,13 @@ z-index: 1
 
 
 # Outline
+.font150[
+Who are we?
 
-- Who are we?
-- What was the problem?
-- How did we solve it?
-  - diffdf
-  - Tailored R training
-  - Some other efforts in the background
+What is the problem we are facing?
+
+How are we solving it?
+]
 
 ---
 
@@ -50,19 +50,23 @@ z-index: 1
   - Kieran Martin and Craig Gower
   - check out https://github.com/gowerc and https://github.com/kieranjmartin
   - My twitter is @kjmartinstats
-- We are Data Analytic Specialists
-- New function, part of statistical programming
-- Want to modernise statistical programming and new ways of addressing new challenges
+- Both Data Analytic Specialists at Roche
+
+.footnote[Slides today are hosted here: https://kieranjmartin.github.io/R4SPA-talk/r4spa.html]
 
 ---
 
 # What was the problem?
 
 Statistical Programmers want to use R!
+&lt;br&gt;&lt;br&gt;
+--
 
 - Lots of attendance on R training courses
-- Lots of engagement in discussion around R
 
+- Lots of engagement in discussion around R
+--
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
 But very little... actual R outputs!
 
 ---
@@ -71,14 +75,17 @@ But very little... actual R outputs!
 
 Lack of use cases for R
 
-Key piece of Programming work is setting up analysis datasets
+--
 
-Reluctance to use R for this task?
+One key piece of programming work is setting up and qcing analysis datasets
 
-Why?
+--
+
+ Reluctance to use R for this task?
+
+**Why?**
 
 ---
-
 # Why?
 
 Belief that data manipulation in R is difficult
@@ -89,19 +96,15 @@ Unclear how to work in production
 
 ---
 
-# What we are doing
 
-diffdf
 
-R training
+#What we are doing?
 
-helper packages
-
----
-
-#diffdf
+**diffdf**
 
 Package for comparing datasets
+
+Gives informative feedback on where issues are
 
 Main page: https://gowerc.github.io/diffdf/
 
@@ -110,50 +113,18 @@ Now on CRAN: https://CRAN.R-project.org/package=diffdf
 Check out github: https://github.com/gowerc/diffdf
 
 ---
-# diffdf example of use:
+# diffdf: missing columns:
+
 
 
 
 
 ```r
 library(diffdf)
-test_data
-```
 
-```
-## # A tibble: 30 x 11
-##       ID GROUP1 GROUP2 INTEGER BINARY DATE       DATETIME           
-##    &lt;int&gt;  &lt;dbl&gt;  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;  &lt;date&gt;     &lt;dttm&gt;             
-##  1     1      1      1      41 M      2003-06-22 2000-11-28 20:40:53
-##  2     2      1      2      41 F      2016-12-03 1994-08-30 19:05:02
-##  3     3      1      3      41 M      2016-05-08 1992-09-11 11:30:18
-##  4     4      1      4      32 M      2015-06-02 2007-11-12 11:28:29
-##  5     5      1      5      55 F      1986-04-15 1998-08-04 01:27:49
-##  6     6      1      6      33 M      1994-05-25 2001-12-05 08:24:35
-##  7     7      1      7      40 F      2009-02-08 1986-11-02 18:13:03
-##  8     8      1      8      44 F      2020-07-21 1998-08-22 05:23:24
-##  9     9      1      9      51 F      1967-05-25 2003-01-03 22:09:29
-## 10    10      1     10      40 M      2044-03-11 1996-04-19 11:10:12
-## # ... with 20 more rows, and 4 more variables: CONTINUOUS &lt;dbl&gt;,
-## #   CATEGORICAL &lt;fct&gt;, LOGICAL &lt;lgl&gt;, CHARACTER &lt;chr&gt;
-```
-
-
----
-# diffdf: missing columns:
-
-```r
-diffdf( test_data , test_data)
-```
-
-```
-## No issues were found!
-```
-
-```r
 test_data2 &lt;- test_data 
 test_data2 &lt;- test_data2[,-6]
-diffdf(test_data , test_data2 , suppress_warnings = T)
+diffdf(test_data , test_data2)
 ```
 
 ```
@@ -176,7 +147,7 @@ diffdf(test_data , test_data2 , suppress_warnings = T)
 ```r
 test_data2 &lt;- test_data
 test_data2 &lt;- test_data2[1:(nrow(test_data2) - 2),]
-diffdf(test_data, test_data2 , suppress_warnings = T)
+diffdf(test_data, test_data2, keys = "ID")
 ```
 
 ```
@@ -187,12 +158,12 @@ diffdf(test_data, test_data2 , suppress_warnings = T)
 ## There are rows in BASE that are not in COMPARE !!
 ## All rows are shown in table below
 ## 
-##   ===============
-##    ..ROWNUMBER.. 
-##   ---------------
-##         29       
-##         30       
-##   ---------------
+##   ====
+##    ID 
+##   ----
+##    29 
+##    30 
+##   ----
 ```
 ---
 # diffdf: different values
@@ -200,7 +171,7 @@ diffdf(test_data, test_data2 , suppress_warnings = T)
 ```r
 test_data2 &lt;- test_data
 test_data2[5,2] &lt;- 6
-difval &lt;- diffdf(test_data , test_data2 , suppress_warnings = T)
+difval &lt;- diffdf(test_data , test_data2, keys = "ID" )
 difval$NumDiff
 ```
 
@@ -217,9 +188,9 @@ difval$VarDiff_GROUP1
 
 ```
 ## # A tibble: 1 x 4
-##   VARIABLE ..ROWNUMBER..  BASE COMPARE
-## * &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
-## 1 GROUP1               5     1       6
+##   VARIABLE    ID  BASE COMPARE
+## * &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 GROUP1       5     1       6
 ```
 ---
 # diffdf: different attributes
@@ -228,7 +199,7 @@ difval$VarDiff_GROUP1
 test_data2 &lt;- test_data
 attr(test_data$ID , "label") &lt;- "This is a interesting label"
 attr(test_data2$ID , "label") &lt;- "what do I type here?"
-diffdf(test_data , test_data2 , suppress_warnings = T)
+diffdf(test_data , test_data2, keys = "ID" )
 ```
 
 ```
@@ -252,8 +223,7 @@ diffdf(test_data , test_data2 , suppress_warnings = T)
 ```r
 test_data2 &lt;- test_data
 test_data2$INTEGER[c(5,2,15)] &lt;- 99L 
-iddiff &lt;- diffdf( test_data , test_data2 , keys = c("GROUP1" , "GROUP2") ,
-        suppress_warnings = T)
+iddiff &lt;- diffdf( test_data , test_data2 , keys = c("GROUP1" , "GROUP2"))
 iddiff$NumDiff
 ```
 
@@ -290,13 +260,9 @@ In house training on **data manipulation** using the **tidyverse**
 - Plan to train people with a specific **use case** for the training
 
 ---
-# Other activities / Q and A
+# Q and A
 
-Other helper packages
-
-
-**Goal**: make people's lives easier when working in R
-
+** Our Goal**: make people's lives easier when working in R
 
 Any questions?
 

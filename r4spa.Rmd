@@ -29,13 +29,13 @@ options(htmltools.dir.version = FALSE)
 ```
 
 # Outline
+.font150[
+Who are we?
 
-- Who are we?
-- What was the problem?
-- How did we solve it?
-  - diffdf
-  - Tailored R training
-  - Some other efforts in the background
+What is the problem we are facing?
+
+How are we solving it?
+]
 
 ---
 
@@ -45,19 +45,23 @@ options(htmltools.dir.version = FALSE)
   - Kieran Martin and Craig Gower
   - check out https://github.com/gowerc and https://github.com/kieranjmartin
   - My twitter is @kjmartinstats
-- We are Data Analytic Specialists
-- New function, part of statistical programming
-- Want to modernise statistical programming and new ways of addressing new challenges
+- Both Data Analytic Specialists at Roche
+
+.footnote[Slides today are hosted here: https://kieranjmartin.github.io/R4SPA-talk/r4spa.html]
 
 ---
 
 # What was the problem?
 
 Statistical Programmers want to use R!
+<br><br>
+--
 
 - Lots of attendance on R training courses
-- Lots of engagement in discussion around R
 
+- Lots of engagement in discussion around R
+--
+<br><br><br>
 But very little... actual R outputs!
 
 ---
@@ -66,14 +70,17 @@ But very little... actual R outputs!
 
 Lack of use cases for R
 
-Key piece of Programming work is setting up analysis datasets
+--
 
-Reluctance to use R for this task?
+One key piece of programming work is setting up and qcing analysis datasets
 
-Why?
+--
+
+ Reluctance to use R for this task?
+
+**Why?**
 
 ---
-
 # Why?
 
 Belief that data manipulation in R is difficult
@@ -84,19 +91,15 @@ Unclear how to work in production
 
 ---
 
-# What we are doing
 
-diffdf
 
-R training
+#What we are doing?
 
-helper packages
-
----
-
-#diffdf
+**diffdf**
 
 Package for comparing datasets
+
+Gives informative feedback on where issues are
 
 Main page: https://gowerc.github.io/diffdf/
 
@@ -105,7 +108,8 @@ Now on CRAN: https://CRAN.R-project.org/package=diffdf
 Check out github: https://github.com/gowerc/diffdf
 
 ---
-# diffdf example of use:
+# diffdf: missing columns:
+
 ```{r, include = FALSE}
 
 LENGTH = 30
@@ -126,59 +130,40 @@ test_data <- tibble::tibble(
 ```
 
 
-```{r}
+```{r, warning=FALSE}
 library(diffdf)
-test_data
-```
 
-
----
-# diffdf: missing columns:
-```{r}
-diffdf( test_data , test_data)
-```
-```{r}
 test_data2 <- test_data 
 test_data2 <- test_data2[,-6]
-diffdf(test_data , test_data2 , suppress_warnings = T)
+diffdf(test_data , test_data2)
 ```
 ---
 # diffdf: missing rows
-```{r}
+```{r, warning=FALSE}
 test_data2 <- test_data
 test_data2 <- test_data2[1:(nrow(test_data2) - 2),]
-diffdf(test_data, test_data2 , suppress_warnings = T)
+diffdf(test_data, test_data2, keys = "ID")
 ```
 ---
 # diffdf: different values
-```{r}
+```{r, warning=FALSE}
 test_data2 <- test_data
 test_data2[5,2] <- 6
-difval <- diffdf(test_data , test_data2 , suppress_warnings = T)
+difval <- diffdf(test_data , test_data2, keys = "ID" )
 difval$NumDiff
 difval$VarDiff_GROUP1
 ```
 ---
 # diffdf: different attributes
-```{r}
+```{r, warning=FALSE}
 test_data2 <- test_data
 attr(test_data$ID , "label") <- "This is a interesting label"
 attr(test_data2$ID , "label") <- "what do I type here?"
-diffdf(test_data , test_data2 , suppress_warnings = T)
+diffdf(test_data , test_data2, keys = "ID" )
 ```
 ---
 
-# diffdf: specify id variables
-```{r}
-test_data2 <- test_data
-test_data2$INTEGER[c(5,2,15)] <- 99L 
-iddiff <- diffdf( test_data , test_data2 , keys = c("GROUP1" , "GROUP2") ,
-        suppress_warnings = T)
-iddiff$NumDiff
-iddiff$VarDiff_INTEGER
-```
 
----
 # R training 
 
 In house training on **data manipulation** using the **tidyverse**
@@ -191,13 +176,7 @@ In house training on **data manipulation** using the **tidyverse**
 - Plan to train people with a specific **use case** for the training
 
 ---
-# Other activities / Q and A
-
-Other helper packages
-
-
-**Goal**: make people's lives easier when working in R
-
+# Q and A
 
 Any questions?
 
