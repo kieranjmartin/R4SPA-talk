@@ -83,11 +83,17 @@ One key piece of programming work is setting up and qcing analysis datasets
 ---
 # Why?
 
-Belief that data manipulation in R is difficult
-
+.content-box-blue[
+Belief that data manipulation in R is **difficult**
+]
+<br><br>
+.content-box-blue[
 Lack of tools (proc compare)
-
-Unclear how to work in production
+]
+<br><br>
+.content-box-blue[
+How to use R in production?
+]
 
 ---
 

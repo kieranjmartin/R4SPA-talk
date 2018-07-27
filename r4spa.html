@@ -88,11 +88,17 @@ One key piece of programming work is setting up and qcing analysis datasets
 ---
 # Why?
 
-Belief that data manipulation in R is difficult
-
+.content-box-blue[
+Belief that data manipulation in R is **difficult**
+]
+&lt;br&gt;&lt;br&gt;
+.content-box-blue[
 Lack of tools (proc compare)
-
-Unclear how to work in production
+]
+&lt;br&gt;&lt;br&gt;
+.content-box-blue[
+How to use R in production?
+]
 
 ---
 
@@ -218,36 +224,7 @@ diffdf(test_data , test_data2, keys = "ID" )
 ```
 ---
 
-# diffdf: specify id variables
 
-```r
-test_data2 &lt;- test_data
-test_data2$INTEGER[c(5,2,15)] &lt;- 99L 
-iddiff &lt;- diffdf( test_data , test_data2 , keys = c("GROUP1" , "GROUP2"))
-iddiff$NumDiff
-```
-
-```
-## # A tibble: 1 x 2
-##   Variable `No of Differences`
-## * &lt;chr&gt;                  &lt;int&gt;
-## 1 INTEGER                    3
-```
-
-```r
-iddiff$VarDiff_INTEGER
-```
-
-```
-## # A tibble: 3 x 5
-##   VARIABLE GROUP1 GROUP2  BASE COMPARE
-## * &lt;chr&gt;     &lt;dbl&gt;  &lt;int&gt; &lt;int&gt;   &lt;int&gt;
-## 1 INTEGER       1      2    41      99
-## 2 INTEGER       1      5    55      99
-## 3 INTEGER       1     15    44      99
-```
-
----
 # R training 
 
 In house training on **data manipulation** using the **tidyverse**
@@ -261,8 +238,6 @@ In house training on **data manipulation** using the **tidyverse**
 
 ---
 # Q and A
-
-** Our Goal**: make people's lives easier when working in R
 
 Any questions?
 
