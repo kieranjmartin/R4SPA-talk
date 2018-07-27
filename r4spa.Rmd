@@ -6,7 +6,7 @@ output:
   xaringan::moon_reader:
     css: ["./libs/remark-css/default.css","./libs/remark-css/metropolis.css", "./libs/remark-css/metropolis-fonts.css" ]
     lib_dir: libs
-    chakra: "./libs/remark/remark.js"
+    chakra:  libs/remark-latest.min.js
     nature:
       highlightStyle: github
       highlightLines: true
