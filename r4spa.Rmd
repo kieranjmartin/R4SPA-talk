@@ -6,6 +6,7 @@ output:
   xaringan::moon_reader:
     css: ["./libs/remark-css/default.css","./libs/remark-css/metropolis.css", "./libs/remark-css/metropolis-fonts.css" ]
     lib_dir: libs
+    chakra: "./libs/remark/remark.js"
     nature:
       highlightStyle: github
       highlightLines: true
@@ -51,7 +52,7 @@ How are we solving it?
 
 ---
 
-# What was the problem?
+# What is the problem?
 
 Statistical Programmers want to use R!
 <br><br>
@@ -66,7 +67,7 @@ But very little... actual R outputs!
 
 ---
 
-# What was the problem?
+# What is the problem?
 
 Lack of use cases for R
 
@@ -76,23 +77,26 @@ One key piece of programming work is setting up and qcing analysis datasets
 
 --
 
- Reluctance to use R for this task?
+ Reluctance to use R for this task
+ <br><br><br>
+--
 
+.content-box-blue-centre[
 **Why?**
-
+]
 ---
 # Why?
 
 .content-box-blue[
 Belief that data manipulation in R is **difficult**
 ]
-<br><br>
+<br>
 .content-box-blue[
 Lack of tools (proc compare)
 ]
-<br><br>
+<br>
 .content-box-blue[
-How to use R in production?
+Training was disconnected from real tasks
 ]
 
 ---
@@ -103,9 +107,11 @@ How to use R in production?
 
 **diffdf**
 
-Package for comparing datasets
+Package for **comparing datasets**
 
-Gives informative feedback on where issues are
+Gives **informative feedback** on where issues are
+
+--
 
 Main page: https://gowerc.github.io/diffdf/
 
@@ -115,6 +121,7 @@ Check out github: https://github.com/gowerc/diffdf
 
 ---
 # diffdf: missing columns:
+<br>
 
 ```{r, include = FALSE}
 
@@ -145,6 +152,7 @@ diffdf(test_data , test_data2)
 ```
 ---
 # diffdf: missing rows
+<br>
 ```{r, warning=FALSE}
 test_data2 <- test_data
 test_data2 <- test_data2[1:(nrow(test_data2) - 2),]
@@ -152,6 +160,7 @@ diffdf(test_data, test_data2, keys = "ID")
 ```
 ---
 # diffdf: different values
+<br>
 ```{r, warning=FALSE}
 test_data2 <- test_data
 test_data2[5,2] <- 6
@@ -161,6 +170,7 @@ difval$VarDiff_GROUP1
 ```
 ---
 # diffdf: different attributes
+<br>
 ```{r, warning=FALSE}
 test_data2 <- test_data
 attr(test_data$ID , "label") <- "This is a interesting label"
@@ -174,11 +184,24 @@ diffdf(test_data , test_data2, keys = "ID" )
 
 In house training on **data manipulation** using the **tidyverse**
 
+--
+
 **What makes this different?**
 
+--
+
 - Focused on **one** task: data derivation
+
+--
+
 - tidyverse makes **easier** to read code (those with less R experience)
+
+--
+
 - Exercises based on our data and specifications
+
+--
+
 - Plan to train people with a specific **use case** for the training
 
 ---

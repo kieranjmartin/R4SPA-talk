@@ -56,7 +56,7 @@ How are we solving it?
 
 ---
 
-# What was the problem?
+# What is the problem?
 
 Statistical Programmers want to use R!
 &lt;br&gt;&lt;br&gt;
@@ -71,7 +71,7 @@ But very little... actual R outputs!
 
 ---
 
-# What was the problem?
+# What is the problem?
 
 Lack of use cases for R
 
@@ -81,23 +81,26 @@ One key piece of programming work is setting up and qcing analysis datasets
 
 --
 
- Reluctance to use R for this task?
+ Reluctance to use R for this task
+ &lt;br&gt;&lt;br&gt;&lt;br&gt;
+--
 
+.content-box-blue-centre[
 **Why?**
-
+]
 ---
 # Why?
 
 .content-box-blue[
 Belief that data manipulation in R is **difficult**
 ]
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 .content-box-blue[
 Lack of tools (proc compare)
 ]
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 .content-box-blue[
-How to use R in production?
+Training was disconnected from real tasks
 ]
 
 ---
@@ -108,9 +111,11 @@ How to use R in production?
 
 **diffdf**
 
-Package for comparing datasets
+Package for **comparing datasets**
 
-Gives informative feedback on where issues are
+Gives **informative feedback** on where issues are
+
+--
 
 Main page: https://gowerc.github.io/diffdf/
 
@@ -120,6 +125,7 @@ Check out github: https://github.com/gowerc/diffdf
 
 ---
 # diffdf: missing columns:
+&lt;br&gt;
 
 
 
@@ -149,6 +155,7 @@ diffdf(test_data , test_data2)
 ```
 ---
 # diffdf: missing rows
+&lt;br&gt;
 
 ```r
 test_data2 &lt;- test_data
@@ -173,6 +180,7 @@ diffdf(test_data, test_data2, keys = "ID")
 ```
 ---
 # diffdf: different values
+&lt;br&gt;
 
 ```r
 test_data2 &lt;- test_data
@@ -200,6 +208,7 @@ difval$VarDiff_GROUP1
 ```
 ---
 # diffdf: different attributes
+&lt;br&gt;
 
 ```r
 test_data2 &lt;- test_data
@@ -229,11 +238,24 @@ diffdf(test_data , test_data2, keys = "ID" )
 
 In house training on **data manipulation** using the **tidyverse**
 
+--
+
 **What makes this different?**
 
+--
+
 - Focused on **one** task: data derivation
+
+--
+
 - tidyverse makes **easier** to read code (those with less R experience)
+
+--
+
 - Exercises based on our data and specifications
+
+--
+
 - Plan to train people with a specific **use case** for the training
 
 ---
@@ -249,7 +271,7 @@ Any questions?
 
 &lt;/div&gt;
     </textarea>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="./libs/remark/remark.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,

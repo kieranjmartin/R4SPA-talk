@@ -265,15 +265,20 @@ background-size: auto;
     vertical-align: middle;
 }
 
-.content-box-blue, .content-box-gray, .content-box-grey, .content-box-army, .content-box-green, .content-box-purple, .content-box-red, .content-box-yellow {
+.content-box-blue {
     border-radius: 15px;
     margin: 0 0 25px;
     overflow: hidden;
-    padding: 20px;
-    width: 80%;
+    padding: 10px;
+    width: 90%;
     position: right;
 }
 
 .content-box-blue {
-    background-color: #F0F8FF;
+    background-color: #a2b9bc;
+}
+
+.content-box-blue-centre {
+    background-color: #a2b9bc;
+    text-align: center;
 }
