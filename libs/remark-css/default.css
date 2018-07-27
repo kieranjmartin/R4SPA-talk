@@ -10,13 +10,13 @@ a, a > code {
 }
 
 .remark-code-line {
-    font-size: 60%;
+    font-size: 65%;
     padding: 1px;
 
 }
 .remark-inline-code {
   /* background: #F5F5F5; /* lighter */
-  font-size: 60%;
+  font-size: 65%;
   padding: 1px;
   background: #e7e8e2; /* darker */
 }

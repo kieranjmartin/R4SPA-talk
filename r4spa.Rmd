@@ -63,7 +63,7 @@ Statistical Programmers want to use R!
 - Lots of engagement in discussion around R
 --
 <br><br><br>
-But very little... actual R outputs!
+.content-box-green[But very little... actual R outputs!]
 
 ---
 
@@ -90,10 +90,12 @@ One key piece of programming work is setting up and qcing analysis datasets
 .content-box-blue[
 Belief that data manipulation in R is **difficult**
 ]
+--
 <br>
 .content-box-blue[
 Lack of tools (proc compare)
 ]
+--
 <br>
 .content-box-blue[
 Training was disconnected from real tasks
@@ -106,10 +108,11 @@ Training was disconnected from real tasks
 #What we are doing?
 
 **diffdf**
-
+.content-box-green[
 Package for **comparing datasets**
 
 Gives **informative feedback** on where issues are
+]
 
 --
 
@@ -174,35 +177,33 @@ difval$VarDiff_GROUP1
 ```{r, warning=FALSE}
 test_data2 <- test_data
 attr(test_data$ID , "label") <- "This is a interesting label"
-attr(test_data2$ID , "label") <- "what do I type here?"
+attr(test_data2$ID , "label") <- "A different label"
 diffdf(test_data , test_data2, keys = "ID" )
 ```
 ---
 
 
 # R training 
-
+.content-box-green[
 In house training on **data manipulation** using the **tidyverse**
+]
 
 --
 
 **What makes this different?**
 
 --
-
 - Focused on **one** task: data derivation
 
 --
-
 - tidyverse makes **easier** to read code (those with less R experience)
 
 --
-
 - Exercises based on our data and specifications
 
 --
-
 - Plan to train people with a specific **use case** for the training
+
 
 ---
 # Q and A

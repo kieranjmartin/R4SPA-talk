@@ -67,7 +67,7 @@ Statistical Programmers want to use R!
 - Lots of engagement in discussion around R
 --
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
-But very little... actual R outputs!
+.content-box-green[But very little... actual R outputs!]
 
 ---
 
@@ -94,10 +94,12 @@ One key piece of programming work is setting up and qcing analysis datasets
 .content-box-blue[
 Belief that data manipulation in R is **difficult**
 ]
+--
 &lt;br&gt;
 .content-box-blue[
 Lack of tools (proc compare)
 ]
+--
 &lt;br&gt;
 .content-box-blue[
 Training was disconnected from real tasks
@@ -110,10 +112,11 @@ Training was disconnected from real tasks
 #What we are doing?
 
 **diffdf**
-
+.content-box-green[
 Package for **comparing datasets**
 
 Gives **informative feedback** on where issues are
+]
 
 --
 
@@ -213,7 +216,7 @@ difval$VarDiff_GROUP1
 ```r
 test_data2 &lt;- test_data
 attr(test_data$ID , "label") &lt;- "This is a interesting label"
-attr(test_data2$ID , "label") &lt;- "what do I type here?"
+attr(test_data2$ID , "label") &lt;- "A different label"
 diffdf(test_data , test_data2, keys = "ID" )
 ```
 
@@ -225,38 +228,36 @@ diffdf(test_data , test_data2, keys = "ID" )
 ## There are columns in BASE and COMPARE with differing attributes !!
 ## All rows are shown in table below
 ## 
-##   ========================================================================
-##    VARIABLE  ATTR_NAME          VALUES.BASE              VALUES.COMP      
-##   ------------------------------------------------------------------------
-##       ID       label    This is a interesting label  what do I type here? 
-##   ------------------------------------------------------------------------
+##   =====================================================================
+##    VARIABLE  ATTR_NAME          VALUES.BASE             VALUES.COMP    
+##   ---------------------------------------------------------------------
+##       ID       label    This is a interesting label  A different label 
+##   ---------------------------------------------------------------------
 ```
 ---
 
 
 # R training 
-
+.content-box-green[
 In house training on **data manipulation** using the **tidyverse**
+]
 
 --
 
 **What makes this different?**
 
 --
-
 - Focused on **one** task: data derivation
 
 --
-
 - tidyverse makes **easier** to read code (those with less R experience)
 
 --
-
 - Exercises based on our data and specifications
 
 --
-
 - Plan to train people with a specific **use case** for the training
+
 
 ---
 # Q and A
